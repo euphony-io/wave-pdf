@@ -1,4 +1,4 @@
-package com.euphony.eupi_ppt_loader
+package com.euphony.eupi_ppt_viewer
 
 import android.content.Context
 import android.content.Intent

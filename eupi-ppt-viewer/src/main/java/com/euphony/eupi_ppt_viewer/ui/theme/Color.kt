@@ -1,4 +1,4 @@
-package com.euphony.eupi_ppt_loader.ui.theme
+package com.euphony.eupi_ppt_viewer.ui.theme
 
 import androidx.compose.ui.graphics.Color
 

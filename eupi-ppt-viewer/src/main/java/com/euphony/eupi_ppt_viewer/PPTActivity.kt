@@ -1,4 +1,4 @@
-package com.euphony.eupi_ppt_loader
+package com.euphony.eupi_ppt_viewer
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
