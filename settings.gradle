@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 rootProject.name = "wave-ppt"
 include ':eupi-ppt-loader'
 include ':eupi-ppt-controller'
+include ':common-lib'

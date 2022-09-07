@@ -66,8 +66,9 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
 
-//compose icon
+    // compose icon
     implementation "androidx.compose.material:material-icons-extended:$compose_version"
 
-
+    // common-lib
+    implementation project(":common-lib")
 }
