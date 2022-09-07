@@ -1,4 +1,4 @@
-package com.example.wave_ppt
+package com.euphony.eupi_ppt_loader
 
 import org.junit.Test
 

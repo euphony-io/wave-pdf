@@ -1,4 +1,4 @@
-package com.example.wave_ppt
+package com.euphony.eupi_ppt_loader
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

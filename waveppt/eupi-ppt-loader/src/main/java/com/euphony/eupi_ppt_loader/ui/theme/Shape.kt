@@ -1,4 +1,4 @@
-package com.example.wave_ppt.ui.theme
+package com.euphony.eupi_ppt_loader.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes
