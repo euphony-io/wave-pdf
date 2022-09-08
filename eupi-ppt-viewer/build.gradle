@@ -45,6 +45,10 @@ android {
     }
 }
 
+//afterEvaluate {
+//    apply from: "$rootDir/gradle/common.gradle"
+//}
+
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.8.0'
@@ -69,6 +73,6 @@ dependencies {
     // compose icon
     implementation "androidx.compose.material:material-icons-extended:$compose_version"
 
-    // common-lib
-    implementation project(":common-lib")
+    // euphony
+    implementation 'co.euphony.lib:euphony:0.8.1.1'
 }

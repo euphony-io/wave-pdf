@@ -60,6 +60,6 @@ dependencies {
     debugImplementation "androidx.compose.ui:ui-tooling:$compose_version"
     debugImplementation "androidx.compose.ui:ui-test-manifest:$compose_version"
 
-    // common-lib
-    implementation project(":common-lib")
+    // euphony
+    implementation 'co.euphony.lib:euphony:0.8.1.1'
 }
