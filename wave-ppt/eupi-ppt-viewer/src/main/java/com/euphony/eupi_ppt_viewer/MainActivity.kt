@@ -26,11 +26,8 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         setContent {
             InitMainView()
-
-
         }
     }
 }
@@ -83,15 +80,16 @@ fun InitMainView() {
                     "Load PDF",
                     "PDF loading success",
                     "Do you want to move to Viewer?",
-                    { goToViewer(context) })
+                    )
             }
         }
     }
 }
 
 @Composable
-fun DialogButton(button: String, title: String, body: String, onConfirm: () -> Unit) {
+fun DialogButton(button: String, title: String, body: String) {
     val openDialog = remember { mutableStateOf(false) }
+    val context = LocalContext.current
 
     TextButton(
         onClick = { openDialog.value = !openDialog.value },
@@ -110,7 +108,7 @@ fun DialogButton(button: String, title: String, body: String, onConfirm: () -> U
             title = { Text(text = "$title") },
             text = { Text(text = "$body") },
             confirmButton = {
-                TextButton(onClick = { onConfirm }) {
+                TextButton(onClick = { goToViewer(context) }) {
                     Text(text = "Yes")
                 }
             },

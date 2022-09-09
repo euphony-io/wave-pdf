@@ -15,6 +15,7 @@ import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.semantics.Role.Companion.Image
 import androidx.compose.ui.tooling.preview.Preview
@@ -36,6 +37,11 @@ class ViewerActivity : ComponentActivity() {
         /*TODO: PDF to Bitmap 이미지 변환 후 List화 */
 
         setContent {
+            Surface(
+                color = Color.White
+            ){
+                Text(text="ViewerActivity page")
+            }
 
         }
 
@@ -45,7 +51,6 @@ class ViewerActivity : ComponentActivity() {
 
 @Composable
 fun PageView(page: ImageBitmap) {
-
     Image(
         bitmap = page,
         contentDescription = null,
