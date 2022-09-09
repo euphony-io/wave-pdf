@@ -32,6 +32,9 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+/*TODO: Load PDF */
+/*TODO: PDF to Bitmap 이미지 변환 후 List화 */
+
 fun goToViewer(context: Context) {
     val intent = Intent(context, ViewerActivity::class.java)
     intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
