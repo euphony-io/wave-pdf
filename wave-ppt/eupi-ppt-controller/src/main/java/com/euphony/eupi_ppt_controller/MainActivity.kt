@@ -74,7 +74,8 @@ fun InitMainView() {
                     "Controller",
                     "",
                     "Do you want to move to Controller?",
-                    { goToController(context) })
+                    context
+                )
             }
         }
     }
@@ -86,7 +87,7 @@ fun goToController(context: Context){
 }
 
 @Composable
-fun DialogButton(button: String, title: String, body: String, onConfirm: () -> Unit) {
+fun DialogButton(button: String, title: String, body: String, context:Context) {
     val openDialog = remember { mutableStateOf(false) }
 
     TextButton(
@@ -106,7 +107,7 @@ fun DialogButton(button: String, title: String, body: String, onConfirm: () -> U
             title = { Text(text = "$title") },
             text = { Text(text = "$body") },
             confirmButton = {
-                TextButton(onClick = { onConfirm }) {
+                TextButton(onClick = { goToController(context) }) {
                     Text(text = "Yes")
                 }
             },
