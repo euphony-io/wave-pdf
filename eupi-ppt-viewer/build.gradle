@@ -36,7 +36,8 @@ android {
         compose true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion compose_version
+        kotlinCompilerExtensionVersion "$compose_version"
+        kotlinCompilerVersion "$kotlin_version"
     }
     packagingOptions {
         resources {
@@ -72,7 +73,7 @@ dependencies {
 
     // compose icon
     implementation "androidx.compose.material:material-icons-extended:$compose_version"
+    //Euphony
+    api 'co.euphony.lib:euphony:0.8.1.1'
 
-    // euphony
-    implementation 'co.euphony.lib:euphony:0.8.1.1'
 }
