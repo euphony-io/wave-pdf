@@ -54,12 +54,12 @@ fun InitControllerView(txManager: EuTxManager) {
         ) {
             Button(
                 onClick = {
-                   if( txManager.callEuPI(
-                           EuPICodeEnum.PREV_PAGE.code,
-                           EuTxManager.EuPIDuration.LENGTH_LONG
-                       )== Constants.Result.OK) {
-                       Log.i("Controller", "PREV button")
-                   }
+                    if( txManager.callEuPI(
+                            EuPICodeEnum.PREV_PAGE.code,
+                            EuTxManager.EuPIDuration.LENGTH_LONG
+                        )== Constants.Result.OK) {
+                        Log.i("Controller", "PREV button")
+                    }
                 },
                 shape = RoundedCornerShape(20),
                 colors = ButtonDefaults.outlinedButtonColors(Color.LightGray),
