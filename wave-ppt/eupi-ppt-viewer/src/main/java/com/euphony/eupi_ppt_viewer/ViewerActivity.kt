@@ -33,9 +33,6 @@ class ViewerActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
 
-        /*TODO: Load PDF */
-        /*TODO: PDF to Bitmap 이미지 변환 후 List화 */
-
         setContent {
             Surface(
                 color = Color.White
