@@ -39,9 +39,10 @@ fun isPDFLoaded():Boolean{
     return true
 }
 
-fun goToViewer(context: Context) {
+fun goToViewer(context: Context, uri: String) {
     val intent = Intent(context, ViewerActivity::class.java)
     intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
+    intent.putExtra("Uri", uri)
     context.startActivity(intent)
 }
 
