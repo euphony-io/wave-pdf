@@ -31,8 +31,8 @@ class ViewerActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
+        var str = intent.getStringExtra("Uri")
+        Log.i("테스트", "받은 값 : $str")
         /*TODO: Load PDF */
         /*TODO: PDF to Bitmap 이미지 변환 후 List화 */
 
@@ -40,7 +40,7 @@ class ViewerActivity : ComponentActivity() {
             Surface(
                 color = Color.White
             ){
-                Text(text="ViewerActivity page")
+                Text(text="$str")
             }
 
         }

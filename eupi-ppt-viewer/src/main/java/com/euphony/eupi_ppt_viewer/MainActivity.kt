@@ -2,9 +2,13 @@ package com.euphony.eupi_ppt_viewer
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
+import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
@@ -96,14 +100,24 @@ fun InitMainView() {
 
 @Composable
 fun DialogButton(button: String) {
-    val openDialog = remember { mutableStateOf(false)}
+    val openDialog = remember { mutableStateOf(false) }
     val context = LocalContext.current
-    var isPDFLoaded = true
+    var isPDFLoaded = remember { mutableStateOf(false) }
+    var pdfPath = remember { mutableStateOf("") }
+    var pdfLauncher = rememberLauncherForActivityResult(
+        ActivityResultContracts.GetContent()
+    ) { uri: Uri? ->
+        if (uri != null) {
+            pdfPath.value = uri.path.toString().split(":").get(1)
+        } else {
+            Log.i("pdfLauncher", "uri is null")
+        }
+        isPDFLoaded.value = !pdfPath.value.equals("")
+        openDialog.value = true
+    }
 
     TextButton(
-        onClick = {
-            isPDFLoaded= isPDFLoaded()
-            openDialog.value = !openDialog.value },
+        onClick = { pdfLauncher.launch("application/pdf") },
         shape = RoundedCornerShape(20),
         colors = ButtonDefaults.outlinedButtonColors(Color.LightGray),
         modifier = Modifier
@@ -114,23 +128,28 @@ fun DialogButton(button: String) {
     }
 
     if (openDialog.value) {
-
-        if(isPDFLoaded){
+        if (isPDFLoaded.value) {
             AlertDialog(
                 onDismissRequest = { openDialog.value != openDialog.value },
                 title = { Text(text = "PDF Load Success!") },
                 text = { Text(text = "Do you want to go to Viewer?") },
                 confirmButton = {
-                    TextButton(onClick = { goToViewer(context) }) {
+
+                    TextButton(onClick = {
+                        goToViewer(context, pdfPath.value)
+                    }) {
                         Text(text = "Yes")
                     }
                 },
                 dismissButton = {
-                    TextButton(onClick = { openDialog.value = false }) {
+                    TextButton(onClick = {
+                        openDialog.value = false
+                        pdfPath.value = ""
+                    }) {
                         Text(text = "Cancel")
                     }
                 })
-        }else{
+        } else {
             AlertDialog(
                 onDismissRequest = { openDialog.value != openDialog.value },
                 title = { Text(text = "PDF Load Failed") },
