@@ -13,10 +13,13 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
+import androidx.compose.ui.platform.LocalContext
 import co.euphony.rx.EuRxManager
 import co.euphony.util.EuOption
 import java.io.File
@@ -26,14 +29,13 @@ class ViewerActivity : ComponentActivity() {
 
     private val TAG = "VIEWER"
     private val rxManager = EuRxManager(EuOption.ModeType.EUPI)
-    private var currentPage = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var str: String = intent.getStringExtra("Uri")!!
         Log.i("테스트", "받은 값 : $str")
         /*TODO: Load PDF */
         val pdfRenderer: PdfRenderer = loadRenderer(str)
-        initRxManager(pdfRenderer.pageCount)
+
         /*TODO: PDF to Bitmap 이미지 변환 후 List화 */
         val imageList: List<ImageBitmap> = pdfToImageBitmaps(pdfRenderer)
 
@@ -41,30 +43,43 @@ class ViewerActivity : ComponentActivity() {
             Surface(
                 color = Color.White
             ) {
-                PageView(imageList.get(currentPage))
+                UpdateView(imageList, rxManager)
             }
-
         }
-
     }
 
-    private fun initRxManager(lastPage: Int) {
+
+    @Composable
+    fun UpdateView(images: List<ImageBitmap>, rxManager: EuRxManager){
+        var currentPage = remember{ mutableStateOf(0)}
+        val lastPage = images.lastIndex
+        val context = LocalContext.current
+
         rxManager.setOnWaveKeyDown(EuPICodeEnum.PREV_PAGE.code.toInt()) {
-            if (currentPage <= 0) {
-                Toast.makeText(this, "This is first page", Toast.LENGTH_LONG)
+            if (currentPage.value <= 0) {
+                Toast.makeText(context, "This is first page", Toast.LENGTH_LONG)
                 Log.d(TAG, "This is first page.")
             } else {
-                currentPage -= 1
+                currentPage.value -= 1
+                Log.d(TAG, "currentPage: $currentPage")
             }
         }
         rxManager.setOnWaveKeyDown(EuPICodeEnum.NEXT_PAGE.code.toInt()) {
-            if (currentPage >= lastPage - 1) {
-                Toast.makeText(this, "This is last page", Toast.LENGTH_LONG)
+            if (currentPage.value >= lastPage - 1) {
+                Toast.makeText(context, "This is last page", Toast.LENGTH_LONG)
                 Log.d(TAG, "This is last page.")
             } else {
-                currentPage += 1
+                currentPage.value += 1
+                Log.d(TAG, "currentPage: $currentPage")
             }
         }
+
+        if(rxManager.listen()){
+            Log.d(TAG, "rxManager: listen success")
+        }else{
+            Log.d(TAG, "rxManager: listen fail")
+        }
+        PageView(images[currentPage.value.toInt()])
     }
 }
 
@@ -84,10 +99,8 @@ private fun loadRenderer(pdfUri: String): PdfRenderer {
 }
 
 private fun pdfToImageBitmaps(pdfRenderer: PdfRenderer): List<ImageBitmap> {
-    Log.i("pdfToImageBitmaps", "Enter getImageBitmaps")
     var mutablePageList: MutableList<ImageBitmap> = mutableListOf<ImageBitmap>()
     for (i: Int in 0..pdfRenderer.pageCount - 1) {
-        Log.i("pdfToImageBitmaps", i.toString())
         var curPage: PdfRenderer.Page = pdfRenderer.openPage(i)
         mutablePageList.add(pageToImageBitmap(curPage))
         curPage.close()
@@ -104,6 +117,8 @@ private fun pageToImageBitmap(page: PdfRenderer.Page): ImageBitmap {
 
     return bitmap.asImageBitmap()
 }
+
+
 
 @Composable
 fun PageView(page: ImageBitmap) {
