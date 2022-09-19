@@ -22,6 +22,7 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
 import co.euphony.rx.EuRxManager
 import co.euphony.util.EuOption
+import com.euphony.common_lib.EuPICodeEnum
 import java.io.File
 
 

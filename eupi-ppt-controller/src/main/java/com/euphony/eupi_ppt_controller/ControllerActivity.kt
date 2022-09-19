@@ -27,6 +27,7 @@ import co.euphony.common.Constants
 import co.euphony.tx.EuTxManager
 import co.euphony.util.EuOption
 import com.euphony.eupi_ppt_controller.ui.theme.WavepptTheme
+import com.euphony.common_lib.EuPICodeEnum
 
 class ControllerActivity : ComponentActivity() {
 
