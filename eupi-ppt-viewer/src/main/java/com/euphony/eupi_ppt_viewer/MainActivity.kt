@@ -39,10 +39,8 @@ class MainActivity : ComponentActivity() {
 
         requestPermissions()
 
-        var loadSuccess = isPDFLoaded()
-
-        if(checkSelfPermission(android.Manifest.permission.MANAGE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
-            Log.i("Viewer", "MANAGE_EXTERNAL_STORAGE DENIED")
+        if(checkSelfPermission(android.Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_DENIED)
+            Log.i("Viewer", "RECORD_AUDIO DENIED")
         if(checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
             Log.i("Viewer", "READ_EXTERNAL_STORAGE DENIED")
 
@@ -66,10 +64,6 @@ class MainActivity : ComponentActivity() {
 
 }
 
-fun isPDFLoaded():Boolean{
-    return true
-}
-
 fun goToViewer(context: Context, uri: String) {
     val intent = Intent(context, ViewerActivity::class.java)
     intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
@@ -79,7 +73,6 @@ fun goToViewer(context: Context, uri: String) {
 
 @Composable
 fun InitMainView() {
-    val context = LocalContext.current
 
     Surface(
         color = Color.White,

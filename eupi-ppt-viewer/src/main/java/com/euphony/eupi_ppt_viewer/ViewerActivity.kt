@@ -34,10 +34,8 @@ class ViewerActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         var str: String = intent.getStringExtra("Uri")!!
         Log.i(TAG, "Selected Uri : $str")
-        /*TODO: Load PDF */
-        val pdfRenderer: PdfRenderer = loadRenderer(str)
 
-        /*TODO: PDF to Bitmap 이미지 변환 후 List화 */
+        val pdfRenderer: PdfRenderer = loadRenderer(str)
         val imageList: List<ImageBitmap> = pdfToImageBitmaps(pdfRenderer)
 
         setContent {
@@ -80,7 +78,7 @@ class ViewerActivity : ComponentActivity() {
         }else{
             Log.d(TAG, "rxManager: listen fail")
         }
-        PageView(images[currentPage.value.toInt()])
+        PageView(images[currentPage.value])
     }
 }
 
@@ -100,7 +98,7 @@ private fun loadRenderer(pdfUri: String): PdfRenderer {
 }
 
 private fun pdfToImageBitmaps(pdfRenderer: PdfRenderer): List<ImageBitmap> {
-    var mutablePageList: MutableList<ImageBitmap> = mutableListOf<ImageBitmap>()
+    var mutablePageList: MutableList<ImageBitmap> = mutableListOf()
     for (i: Int in 0..pdfRenderer.pageCount - 1) {
         var curPage: PdfRenderer.Page = pdfRenderer.openPage(i)
         mutablePageList.add(pageToImageBitmap(curPage))
