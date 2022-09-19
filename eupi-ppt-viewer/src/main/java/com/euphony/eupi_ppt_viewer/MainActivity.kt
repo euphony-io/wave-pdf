@@ -2,12 +2,15 @@ package com.euphony.eupi_ppt_viewer
 
 import android.content.Context
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
+import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -28,15 +31,41 @@ import androidx.compose.ui.unit.dp
 
 class MainActivity : ComponentActivity() {
 
+    private val PERMISSIONS: Array<String> = arrayOf(
+        android.Manifest.permission.RECORD_AUDIO,
+        android.Manifest.permission.READ_EXTERNAL_STORAGE
+    )
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        requestPermissions()
+
         var loadSuccess = isPDFLoaded()
+
+        if(checkSelfPermission(android.Manifest.permission.MANAGE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
+            Log.i("테스트", "MANAGE_EXTERNAL_STORAGE DENIED")
+        if(checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
+            Log.i("테스트", "READ_EXTERNAL_STORAGE DENIED")
 
         setContent {
             InitMainView()
         }
     }
+
+    private fun requestPermissions() {
+        val multiplePermissionLauncher =
+            registerForActivityResult(ActivityResultContracts.RequestMultiplePermissions()) { grantResult ->
+            for(result in grantResult.values) {
+                if(!result) {
+                    finish()
+                }
+            }
+        }
+
+        multiplePermissionLauncher.launch(PERMISSIONS)
+    }
+
 }
 
 fun isPDFLoaded():Boolean{
