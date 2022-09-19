@@ -4,7 +4,7 @@
     package="com.euphony.eupi_ppt_viewer">
 
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
-
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
@@ -14,15 +14,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Waveppt"
-        tools:targetApi="31">
+        android:requestLegacyExternalStorage="true"
+        tools:targetApi="29">
         <activity
             android:name=".ViewerActivity"
             android:exported="false"
             android:label="@string/title_activity_viewer"
             android:theme="@style/Theme.Waveppt" />
-        <activity
-            android:name=".PPTActivity"
-            android:exported="false" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
