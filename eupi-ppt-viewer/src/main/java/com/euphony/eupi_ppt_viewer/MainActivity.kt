@@ -42,9 +42,9 @@ class MainActivity : ComponentActivity() {
         var loadSuccess = isPDFLoaded()
 
         if(checkSelfPermission(android.Manifest.permission.MANAGE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
-            Log.i("테스트", "MANAGE_EXTERNAL_STORAGE DENIED")
+            Log.i("Viewer", "MANAGE_EXTERNAL_STORAGE DENIED")
         if(checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
-            Log.i("테스트", "READ_EXTERNAL_STORAGE DENIED")
+            Log.i("Viewer", "READ_EXTERNAL_STORAGE DENIED")
 
         setContent {
             InitMainView()

@@ -33,7 +33,7 @@ class ViewerActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var str: String = intent.getStringExtra("Uri")!!
-        Log.i("테스트", "받은 값 : $str")
+        Log.i(TAG, "Selected Uri : $str")
         /*TODO: Load PDF */
         val pdfRenderer: PdfRenderer = loadRenderer(str)
 
@@ -88,14 +88,14 @@ private fun loadRenderer(pdfUri: String): PdfRenderer {
     var pdfFile: File = File(pdfUri)
     var mPdfRenderer: PdfRenderer
     if (!pdfFile.exists()) {
-        Log.i("readPdf", "File is not Exist, Your File Path : ${pdfUri}")
+        Log.i("loadRenderer", "File is not Exist, Your File Path : ${pdfUri}")
     }
     var mFileDescriptor = ParcelFileDescriptor.open(pdfFile, ParcelFileDescriptor.MODE_READ_ONLY)
     if (mFileDescriptor == null) {
-        Log.i("readPdf", "Can't load mFileDescriptor")
+        Log.i("loadRenderer", "Can't load mFileDescriptor")
     }
     mPdfRenderer = PdfRenderer(mFileDescriptor)
-    Log.i("readPdf", "Pdf Page Count : " + mPdfRenderer.pageCount)
+    Log.i("loadRenderer", "Pdf Page Count : " + mPdfRenderer.pageCount)
     return mPdfRenderer
 }
 

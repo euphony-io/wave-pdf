@@ -46,7 +46,7 @@ fun InitControllerView(txManager: EuTxManager) {
                             EuPICodeEnum.PREV_PAGE.code,
                             EuTxManager.EuPIDuration.LENGTH_LONG
                         )== Constants.Result.OK) {
-                        Log.i("Controller", "PREV button")
+                        Log.i("Controller", "PREV button is clicked")
                     }
                 },
                 shape = RoundedCornerShape(20),
@@ -61,7 +61,7 @@ fun InitControllerView(txManager: EuTxManager) {
                             EuPICodeEnum.NEXT_PAGE.code,
                             EuTxManager.EuPIDuration.LENGTH_LONG
                         )== Constants.Result.OK) {
-                        Log.i("Controller", "NEXT button")
+                        Log.i("Controller", "NEXT button is clicked")
                     }
                 },
                 shape = RoundedCornerShape(20),
