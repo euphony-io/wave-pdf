@@ -4,13 +4,11 @@ import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.net.Uri
-import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.compose.setContent
-import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -41,12 +39,10 @@ class MainActivity : ComponentActivity() {
 
         requestPermissions()
 
-        var loadSuccess = isPDFLoaded()
-
-        if(checkSelfPermission(android.Manifest.permission.MANAGE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
-            Log.i("테스트", "MANAGE_EXTERNAL_STORAGE DENIED")
+        if(checkSelfPermission(android.Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_DENIED)
+            Log.i("Viewer", "RECORD_AUDIO DENIED")
         if(checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
-            Log.i("테스트", "READ_EXTERNAL_STORAGE DENIED")
+            Log.i("Viewer", "READ_EXTERNAL_STORAGE DENIED")
 
         setContent {
             InitMainView()
@@ -68,10 +64,6 @@ class MainActivity : ComponentActivity() {
 
 }
 
-fun isPDFLoaded():Boolean{
-    return true
-}
-
 fun goToViewer(context: Context, uri: String) {
     val intent = Intent(context, ViewerActivity::class.java)
     intent.flags = Intent.FLAG_ACTIVITY_SINGLE_TOP
@@ -81,7 +73,6 @@ fun goToViewer(context: Context, uri: String) {
 
 @Composable
 fun InitMainView() {
-    val context = LocalContext.current
 
     Surface(
         color = Color.White,

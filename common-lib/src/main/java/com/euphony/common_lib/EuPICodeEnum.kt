@@ -1,4 +1,4 @@
-package com.euphony.eupi_ppt_viewer
+package com.euphony.common_lib
 
 enum class EuPICodeEnum (val code: Double){
     PREV_PAGE (18500.0),

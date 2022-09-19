@@ -66,4 +66,7 @@ dependencies {
 
     // euphony
     implementation 'co.euphony.lib:euphony:0.8.1.1'
+
+    // common-lib
+    implementation project(":common-lib")
 }
