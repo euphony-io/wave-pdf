@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">wave-ppt</string>
+    <string name="app_name">wave-pdf</string>
     <string name="title_activity_viewer">ViewerActivity</string>
 </resources>

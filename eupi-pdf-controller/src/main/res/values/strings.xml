@@ -1,4 +1,4 @@
 <resources>
-    <string name="app_name">eupi-ppt-controller</string>
+    <string name="app_name">eupi-pdf-controller</string>
     <string name="title_activity_controller">ControllerActivity</string>
 </resources>

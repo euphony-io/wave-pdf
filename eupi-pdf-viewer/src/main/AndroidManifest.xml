@@ -13,19 +13,19 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Waveppt"
+        android:theme="@style/Theme.Wavepdf"
         android:requestLegacyExternalStorage="true"
         tools:targetApi="29">
         <activity
             android:name=".ViewerActivity"
             android:exported="false"
             android:label="@string/title_activity_viewer"
-            android:theme="@style/Theme.Waveppt" />
+            android:theme="@style/Theme.Wavepdf" />
         <activity
             android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.Waveppt">
+            android:theme="@style/Theme.Wavepdf">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
