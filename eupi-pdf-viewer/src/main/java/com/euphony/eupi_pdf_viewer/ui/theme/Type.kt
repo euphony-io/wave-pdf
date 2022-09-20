@@ -1,4 +1,4 @@
-package com.euphony.eupi_ppt_viewer.ui.theme
+package com.euphony.eupi_pdf_viewer.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

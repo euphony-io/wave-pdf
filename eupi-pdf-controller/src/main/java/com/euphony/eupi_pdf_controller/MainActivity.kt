@@ -1,4 +1,4 @@
-package com.euphony.eupi_ppt_controller
+package com.euphony.eupi_pdf_controller
 
 import android.content.Context
 import android.content.Intent

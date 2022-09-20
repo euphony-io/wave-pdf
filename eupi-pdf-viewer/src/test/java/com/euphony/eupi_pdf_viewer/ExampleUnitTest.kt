@@ -1,4 +1,4 @@
-package com.euphony.eupi_ppt_viewer
+package com.euphony.eupi_pdf_viewer
 
 import org.junit.Test
 

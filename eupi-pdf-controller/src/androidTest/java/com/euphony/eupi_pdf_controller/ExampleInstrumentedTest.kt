@@ -1,4 +1,4 @@
-package com.euphony.eupi_ppt_viewer
+package com.euphony.eupi_pdf_controller
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("com.euphony.eupi_ppt_viewer", appContext.packageName)
+        assertEquals("com.euphony.eupi_pdf_controller", appContext.packageName)
     }
 }

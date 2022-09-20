@@ -7,7 +7,7 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.euphony.eupi_ppt_controller"
+        applicationId "com.euphony.eupi_pdf_controller"
         minSdk 21
         targetSdk 33
         versionCode 1

@@ -1,4 +1,4 @@
-package com.euphony.eupi_ppt_viewer
+package com.euphony.eupi_pdf_viewer
 
 import android.graphics.Bitmap
 import android.graphics.pdf.PdfRenderer

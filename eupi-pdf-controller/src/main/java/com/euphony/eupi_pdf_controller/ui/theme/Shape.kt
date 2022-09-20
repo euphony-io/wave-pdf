@@ -1,4 +1,4 @@
-package com.euphony.eupi_ppt_controller.ui.theme
+package com.euphony.eupi_pdf_controller.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

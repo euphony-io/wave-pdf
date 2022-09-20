@@ -1,4 +1,4 @@
-package com.euphony.eupi_ppt_controller
+package com.euphony.eupi_pdf_controller
 
 import android.os.Bundle
 import android.util.Log
