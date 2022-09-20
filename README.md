@@ -21,7 +21,7 @@ In controller, you just move to control page and click button. Then, device will
 <br/>
 
 ## Viewer
-### 1. Permmisions aloow : Record Audio & Access Stroage  
+### 1. Permmisions allow : Record Audio & Access Stroage  
 <table>
   <tr>
 <td><img src="https://user-images.githubusercontent.com/89901283/191147656-c901aad4-df92-41fd-95e8-94fd4f4710ca.png" height = "400px" />
