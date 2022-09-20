@@ -13,7 +13,7 @@ dependencyResolutionManagement {
     }
 }
 rootProject.name = "wave-ppt"
-include ':eupi-ppt-viewer'
-include ':eupi-ppt-controller'
+include ':eupi-pdf-viewer'
+include ':eupi-pdf-controller'
 include ':euphony'
 include ':common-lib'
