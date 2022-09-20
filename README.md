@@ -42,6 +42,11 @@ In controller, you just move to control page and click button. Then, device will
 ### 3. If you success to load PDF, device will listen automatically and move page by controller's signal.  
 <img src="https://user-images.githubusercontent.com/89901283/191148029-efb3d8e4-623a-4108-894d-2925bb6a9f61.png" height = "400px" />
 
+### Test
+
+![KakaoTalk_20220920_130150192 (online-video-cutter com) (1) (3) (1)](https://user-images.githubusercontent.com/89901283/191165993-54aeac22-b83b-4945-a9c3-c95a36241833.gif)
+
+
 <br/>
 <br/>
 <br/>
