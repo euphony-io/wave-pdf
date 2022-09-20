@@ -28,7 +28,8 @@ In controller, you just move to control page and click button. Then, device will
 <td><img src="https://user-images.githubusercontent.com/89901283/191147647-4439059d-a682-486a-a11d-acead50f453f.png" height = "400px" />
 <tr>
 </table>  
-
+<br/>
+    
 ### 2. Select PDF file you want to show.  
 <table>
   <tr>
@@ -36,7 +37,8 @@ In controller, you just move to control page and click button. Then, device will
 <td><img src="https://user-images.githubusercontent.com/89901283/191147901-c59c22cf-c6de-4ef6-a141-746f245816d9.png" height = "400px" />
 <tr>
 </table>  
-
+<br/>
+    
 ### 3. If you success to load PDF, device will listen automatically and move page by controller's signal.  
 <img src="https://user-images.githubusercontent.com/89901283/191148029-efb3d8e4-623a-4108-894d-2925bb6a9f61.png" height = "400px" />
 
