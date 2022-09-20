@@ -1,4 +1,4 @@
-# wave-ppt
+# wave-pdf
 Sample App for using Euphony library - EuPI mode. You can show pdf file to viewer, and control it by controller.
 <br/>
 <br/>
