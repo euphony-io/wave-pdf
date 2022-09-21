@@ -49,7 +49,7 @@ fun InitMainView() {
             Text(
                 modifier = Modifier
                     .fillMaxWidth(),
-                text = "wave-ppt",
+                text = "wave-pdf",
                 style = MaterialTheme.typography.h2,
                 textAlign = TextAlign.Center,
                 fontWeight = FontWeight.Bold,
