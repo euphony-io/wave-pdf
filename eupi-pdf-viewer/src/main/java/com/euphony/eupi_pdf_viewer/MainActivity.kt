@@ -31,7 +31,6 @@ class MainActivity : ComponentActivity() {
 
     private val PERMISSIONS: Array<String> = arrayOf(
         android.Manifest.permission.RECORD_AUDIO,
-        android.Manifest.permission.READ_EXTERNAL_STORAGE
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {

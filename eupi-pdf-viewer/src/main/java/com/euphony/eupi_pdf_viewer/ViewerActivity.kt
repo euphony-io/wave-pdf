@@ -25,7 +25,6 @@ import androidx.core.net.toUri
 import co.euphony.rx.EuRxManager
 import co.euphony.util.EuOption
 import com.euphony.common_lib.EuPICodeEnum
-import java.io.File
 
 
 class ViewerActivity : ComponentActivity() {
@@ -85,33 +84,28 @@ class ViewerActivity : ComponentActivity() {
 }
 
 private fun loadRenderer(context : Context, pdfUri: String): PdfRenderer {
-    var mPdfRenderer: PdfRenderer
-    var mFileDescriptor : ParcelFileDescriptor? = context.contentResolver.openFileDescriptor(pdfUri.toUri(), "r")
+    val mFileDescriptor : ParcelFileDescriptor? = context.contentResolver.openFileDescriptor(pdfUri.toUri(), "r")
     if (mFileDescriptor == null) {
         Log.i("loadRenderer", "Can't load mFileDescriptor")
     }
-    mPdfRenderer = PdfRenderer(mFileDescriptor!!)
+    val mPdfRenderer = PdfRenderer(mFileDescriptor!!)
     Log.i("loadRenderer", "Pdf Page Count : " + mPdfRenderer.pageCount)
     return mPdfRenderer
 }
 
 private fun pdfToImageBitmaps(pdfRenderer: PdfRenderer): List<ImageBitmap> {
-    var mutablePageList: MutableList<ImageBitmap> = mutableListOf()
-    for (i: Int in 0..pdfRenderer.pageCount - 1) {
-        var curPage: PdfRenderer.Page = pdfRenderer.openPage(i)
-        mutablePageList.add(pageToImageBitmap(curPage))
+    var pageImageList : List<ImageBitmap> = emptyList()
+    for (i : Int in 0..pdfRenderer.pageCount - 1) {
+        var curPage : PdfRenderer.Page = pdfRenderer.openPage(i)
+        pageImageList += pageToImageBitmap(curPage)
         curPage.close()
     }
-
-    return mutablePageList.toList()
+    return pageImageList
 }
 
 private fun pageToImageBitmap(page: PdfRenderer.Page): ImageBitmap {
-    var pageWidth = page.width
-    var pageHeight = page.height
-    var bitmap: Bitmap = Bitmap.createBitmap(pageWidth, pageHeight, Bitmap.Config.ARGB_8888)
+    var bitmap: Bitmap = Bitmap.createBitmap(page.width, page.height, Bitmap.Config.ARGB_8888)
     page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
-
     return bitmap.asImageBitmap()
 }
 
