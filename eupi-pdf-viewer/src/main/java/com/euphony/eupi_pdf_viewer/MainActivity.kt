@@ -37,11 +37,8 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         requestPermissions()
-
         if(checkSelfPermission(android.Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_DENIED)
             Log.i("Viewer", "RECORD_AUDIO DENIED")
-        if(checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
-            Log.i("Viewer", "READ_EXTERNAL_STORAGE DENIED")
 
         setContent {
             InitMainView()
