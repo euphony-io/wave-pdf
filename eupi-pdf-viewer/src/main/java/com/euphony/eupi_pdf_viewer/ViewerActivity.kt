@@ -1,5 +1,6 @@
 package com.euphony.eupi_pdf_viewer
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.pdf.PdfRenderer
 import android.os.Bundle
@@ -20,6 +21,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
+import androidx.core.net.toUri
 import co.euphony.rx.EuRxManager
 import co.euphony.util.EuOption
 import com.euphony.common_lib.EuPICodeEnum
@@ -35,7 +37,7 @@ class ViewerActivity : ComponentActivity() {
         var pdfUri: String = intent.getStringExtra("Uri")!!
         Log.i(TAG, "Received Uri : $pdfUri")
 
-        val pdfRenderer: PdfRenderer = loadRenderer(pdfUri)
+        val pdfRenderer: PdfRenderer = loadRenderer(applicationContext, pdfUri)
         val imageList: List<ImageBitmap> = pdfToImageBitmaps(pdfRenderer)
 
         setContent {
@@ -82,17 +84,13 @@ class ViewerActivity : ComponentActivity() {
     }
 }
 
-private fun loadRenderer(pdfUri: String): PdfRenderer {
-    var pdfFile: File = File(pdfUri)
+private fun loadRenderer(context : Context, pdfUri: String): PdfRenderer {
     var mPdfRenderer: PdfRenderer
-    if (!pdfFile.exists()) {
-        Log.i("loadRenderer", "File is not Exist, Your File Path : ${pdfUri}")
-    }
-    var mFileDescriptor = ParcelFileDescriptor.open(pdfFile, ParcelFileDescriptor.MODE_READ_ONLY)
+    var mFileDescriptor : ParcelFileDescriptor? = context.contentResolver.openFileDescriptor(pdfUri.toUri(), "r")
     if (mFileDescriptor == null) {
         Log.i("loadRenderer", "Can't load mFileDescriptor")
     }
-    mPdfRenderer = PdfRenderer(mFileDescriptor)
+    mPdfRenderer = PdfRenderer(mFileDescriptor!!)
     Log.i("loadRenderer", "Pdf Page Count : " + mPdfRenderer.pageCount)
     return mPdfRenderer
 }
