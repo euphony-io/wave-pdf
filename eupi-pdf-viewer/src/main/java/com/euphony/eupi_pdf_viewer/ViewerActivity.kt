@@ -32,10 +32,10 @@ class ViewerActivity : ComponentActivity() {
     private val rxManager = EuRxManager(EuOption.ModeType.EUPI)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var str: String = intent.getStringExtra("Uri")!!
-        Log.i(TAG, "Selected Uri : $str")
+        var pdfUri: String = intent.getStringExtra("Uri")!!
+        Log.i(TAG, "Received Uri : $pdfUri")
 
-        val pdfRenderer: PdfRenderer = loadRenderer(str)
+        val pdfRenderer: PdfRenderer = loadRenderer(pdfUri)
         val imageList: List<ImageBitmap> = pdfToImageBitmaps(pdfRenderer)
 
         setContent {
