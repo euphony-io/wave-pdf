@@ -94,10 +94,10 @@ private fun loadRenderer(context : Context, pdfUri: String): PdfRenderer {
 }
 
 private fun pdfToImageBitmaps(pdfRenderer: PdfRenderer): List<ImageBitmap> {
-    var pageImageList : List<ImageBitmap> = emptyList()
+    var pageImageList : MutableList<ImageBitmap> = mutableListOf()
     for (i : Int in 0..pdfRenderer.pageCount - 1) {
         var curPage : PdfRenderer.Page = pdfRenderer.openPage(i)
-        pageImageList += pageToImageBitmap(curPage)
+        pageImageList.add(pageToImageBitmap(curPage))
         curPage.close()
     }
     return pageImageList
