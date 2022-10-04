@@ -31,18 +31,14 @@ class MainActivity : ComponentActivity() {
 
     private val PERMISSIONS: Array<String> = arrayOf(
         android.Manifest.permission.RECORD_AUDIO,
-        android.Manifest.permission.READ_EXTERNAL_STORAGE
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         requestPermissions()
-
         if(checkSelfPermission(android.Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_DENIED)
             Log.i("Viewer", "RECORD_AUDIO DENIED")
-        if(checkSelfPermission(android.Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_DENIED)
-            Log.i("Viewer", "READ_EXTERNAL_STORAGE DENIED")
 
         setContent {
             InitMainView()
@@ -123,16 +119,16 @@ fun DialogButton(button: String) {
     val openDialog = remember { mutableStateOf(false) }
     val context = LocalContext.current
     var isPDFLoaded = remember { mutableStateOf(false) }
-    var pdfPath = remember { mutableStateOf("") }
+    var pdfUri = remember { mutableStateOf("") }
     var pdfLauncher = rememberLauncherForActivityResult(
         ActivityResultContracts.GetContent()
     ) { uri: Uri? ->
         if (uri != null) {
-            pdfPath.value = uri.path.toString().split(":").get(1)
+            pdfUri.value = uri.toString()
         } else {
             Log.i("pdfLauncher", "uri is null")
         }
-        isPDFLoaded.value = !pdfPath.value.equals("")
+        isPDFLoaded.value = !pdfUri.value.equals("")
         openDialog.value = true
     }
 
@@ -156,7 +152,7 @@ fun DialogButton(button: String) {
                 confirmButton = {
 
                     TextButton(onClick = {
-                        goToViewer(context, pdfPath.value)
+                        goToViewer(context, pdfUri.value)
                     }) {
                         Text(text = "Yes")
                     }
@@ -164,7 +160,7 @@ fun DialogButton(button: String) {
                 dismissButton = {
                     TextButton(onClick = {
                         openDialog.value = false
-                        pdfPath.value = ""
+                        pdfUri.value = ""
                     }) {
                         Text(text = "Cancel")
                     }

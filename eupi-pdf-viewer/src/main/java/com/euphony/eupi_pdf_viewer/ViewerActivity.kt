@@ -1,5 +1,6 @@
 package com.euphony.eupi_pdf_viewer
 
+import android.content.Context
 import android.graphics.Bitmap
 import android.graphics.pdf.PdfRenderer
 import android.os.Bundle
@@ -20,10 +21,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ImageBitmap
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.platform.LocalContext
+import androidx.core.net.toUri
 import co.euphony.rx.EuRxManager
 import co.euphony.util.EuOption
 import com.euphony.common_lib.EuPICodeEnum
-import java.io.File
 
 
 class ViewerActivity : ComponentActivity() {
@@ -32,10 +33,10 @@ class ViewerActivity : ComponentActivity() {
     private val rxManager = EuRxManager(EuOption.ModeType.EUPI)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var str: String = intent.getStringExtra("Uri")!!
-        Log.i(TAG, "Selected Uri : $str")
+        var pdfUri: String = intent.getStringExtra("Uri")!!
+        Log.i(TAG, "Received Uri : $pdfUri")
 
-        val pdfRenderer: PdfRenderer = loadRenderer(str)
+        val pdfRenderer: PdfRenderer = loadRenderer(applicationContext, pdfUri)
         val imageList: List<ImageBitmap> = pdfToImageBitmaps(pdfRenderer)
 
         setContent {
@@ -82,38 +83,29 @@ class ViewerActivity : ComponentActivity() {
     }
 }
 
-private fun loadRenderer(pdfUri: String): PdfRenderer {
-    var pdfFile: File = File(pdfUri)
-    var mPdfRenderer: PdfRenderer
-    if (!pdfFile.exists()) {
-        Log.i("loadRenderer", "File is not Exist, Your File Path : ${pdfUri}")
-    }
-    var mFileDescriptor = ParcelFileDescriptor.open(pdfFile, ParcelFileDescriptor.MODE_READ_ONLY)
+private fun loadRenderer(context : Context, pdfUri: String): PdfRenderer {
+    val mFileDescriptor : ParcelFileDescriptor? = context.contentResolver.openFileDescriptor(pdfUri.toUri(), "r")
     if (mFileDescriptor == null) {
         Log.i("loadRenderer", "Can't load mFileDescriptor")
     }
-    mPdfRenderer = PdfRenderer(mFileDescriptor)
+    val mPdfRenderer = PdfRenderer(mFileDescriptor!!)
     Log.i("loadRenderer", "Pdf Page Count : " + mPdfRenderer.pageCount)
     return mPdfRenderer
 }
 
 private fun pdfToImageBitmaps(pdfRenderer: PdfRenderer): List<ImageBitmap> {
-    var mutablePageList: MutableList<ImageBitmap> = mutableListOf()
-    for (i: Int in 0..pdfRenderer.pageCount - 1) {
-        var curPage: PdfRenderer.Page = pdfRenderer.openPage(i)
-        mutablePageList.add(pageToImageBitmap(curPage))
+    var pageImageList : MutableList<ImageBitmap> = mutableListOf()
+    for (i : Int in 0..pdfRenderer.pageCount - 1) {
+        var curPage : PdfRenderer.Page = pdfRenderer.openPage(i)
+        pageImageList.add(pageToImageBitmap(curPage))
         curPage.close()
     }
-
-    return mutablePageList.toList()
+    return pageImageList
 }
 
 private fun pageToImageBitmap(page: PdfRenderer.Page): ImageBitmap {
-    var pageWidth = page.width
-    var pageHeight = page.height
-    var bitmap: Bitmap = Bitmap.createBitmap(pageWidth, pageHeight, Bitmap.Config.ARGB_8888)
+    var bitmap: Bitmap = Bitmap.createBitmap(page.width, page.height, Bitmap.Config.ARGB_8888)
     page.render(bitmap, null, null, PdfRenderer.Page.RENDER_MODE_FOR_DISPLAY)
-
     return bitmap.asImageBitmap()
 }
 
