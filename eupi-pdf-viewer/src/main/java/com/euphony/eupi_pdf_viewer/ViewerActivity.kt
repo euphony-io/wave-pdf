@@ -57,7 +57,7 @@ class ViewerActivity : ComponentActivity() {
 
         rxManager.setOnWaveKeyDown(EuPICodeEnum.PREV_PAGE.code.toInt()) {
             if (currentPage.value <= 0) {
-                Toast.makeText(context, "This is first page", Toast.LENGTH_LONG)
+                Toast.makeText(context, "This is first page", Toast.LENGTH_LONG).show()
                 Log.d(TAG, "This is first page.")
             } else {
                 currentPage.value -= 1
@@ -66,7 +66,7 @@ class ViewerActivity : ComponentActivity() {
         }
         rxManager.setOnWaveKeyDown(EuPICodeEnum.NEXT_PAGE.code.toInt()) {
             if (currentPage.value >= lastPage - 1) {
-                Toast.makeText(context, "This is last page", Toast.LENGTH_LONG)
+                Toast.makeText(context, "This is last page", Toast.LENGTH_LONG).show()
                 Log.d(TAG, "This is last page.")
             } else {
                 currentPage.value += 1
