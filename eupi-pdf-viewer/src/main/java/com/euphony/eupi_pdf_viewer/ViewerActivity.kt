@@ -29,7 +29,7 @@ import com.euphony.common_lib.EuPICodeEnum
 
 class ViewerActivity : ComponentActivity() {
 
-    private val TAG = "VIEWER"
+    private val TAG = "WAVE_VIEWER"
     private val rxManager = EuRxManager(EuOption.ModeType.EUPI)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
