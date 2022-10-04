@@ -44,7 +44,7 @@ fun InitControllerView(txManager: EuTxManager) {
                 onClick = {
                     if( txManager.callEuPI(
                             EuPICodeEnum.PREV_PAGE.code,
-                            EuTxManager.EuPIDuration.LENGTH_SHORT
+                            EuTxManager.EuPIDuration.LENGTH_LONG
                         )== Constants.Result.OK) {
                         Log.i("WAVE_CONTROLLER", "PREV button is clicked")
                     }
@@ -59,7 +59,7 @@ fun InitControllerView(txManager: EuTxManager) {
                 onClick = {
                     if( txManager.callEuPI(
                             EuPICodeEnum.NEXT_PAGE.code,
-                            EuTxManager.EuPIDuration.LENGTH_SHORT
+                            EuTxManager.EuPIDuration.LENGTH_LONG
                         )== Constants.Result.OK) {
                         Log.i("WAVE_CONTROLLER", "NEXT button is clicked")
                     }
