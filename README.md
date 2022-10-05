@@ -47,6 +47,9 @@ In controller, you just move to control page and click button. Then, device will
 ![KakaoTalk_20220920_130150192 (online-video-cutter com) (1) (3) (1)](https://user-images.githubusercontent.com/89901283/191165993-54aeac22-b83b-4945-a9c3-c95a36241833.gif)
 
 
+
+![ezgif com-gif-maker-2 (1)](https://user-images.githubusercontent.com/89901283/193982646-75c08c4f-da6e-482d-8c87-831633173cdc.gif)
+
 <br/>
 <br/>
 <br/>
