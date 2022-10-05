@@ -30,11 +30,17 @@ import com.euphony.common_lib.EuPICodeEnum
 class ViewerActivity : ComponentActivity() {
 
     private val TAG = "WAVE_VIEWER"
-    private val rxManager = EuRxManager(EuOption.ModeType.EUPI)
+    private val rxManager = EuRxManager.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var pdfUri: String = intent.getStringExtra("Uri")!!
         Log.i(TAG, "Received Uri : $pdfUri")
+        rxManager.setOption(EuOption.builder()
+            .modeWith(EuOption.ModeType.EUPI)
+            .encodingWith(EuOption.CodingType.BASE16)
+            .modulationWith((EuOption.ModulationType.FSK))
+            .build())
 
         val pdfRenderer: PdfRenderer = loadRenderer(applicationContext, pdfUri)
         val imageList: List<ImageBitmap> = pdfToImageBitmaps(pdfRenderer)

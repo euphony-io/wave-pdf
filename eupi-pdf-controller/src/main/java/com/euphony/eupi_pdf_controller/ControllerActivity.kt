@@ -18,11 +18,10 @@ import com.euphony.common_lib.EuPICodeEnum
 
 class ControllerActivity : ComponentActivity() {
 
-    private val txManager = EuTxManager()
+    private val txManager = EuTxManager.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        txManager.setMode(EuOption.ModeType.EUPI)
 
         setContent {
             InitControllerView(txManager = txManager)
