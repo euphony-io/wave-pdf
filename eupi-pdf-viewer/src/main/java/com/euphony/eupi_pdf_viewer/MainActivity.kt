@@ -38,7 +38,7 @@ class MainActivity : ComponentActivity() {
 
         requestPermissions()
         if(checkSelfPermission(android.Manifest.permission.RECORD_AUDIO) == PackageManager.PERMISSION_DENIED)
-            Log.i("Viewer", "RECORD_AUDIO DENIED")
+            Log.i("WAVE_VIEWER", "RECORD_AUDIO DENIED")
 
         setContent {
             InitMainView()

@@ -29,12 +29,18 @@ import com.euphony.common_lib.EuPICodeEnum
 
 class ViewerActivity : ComponentActivity() {
 
-    private val TAG = "VIEWER"
-    private val rxManager = EuRxManager(EuOption.ModeType.EUPI)
+    private val TAG = "WAVE_VIEWER"
+    private val rxManager = EuRxManager.getInstance()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var pdfUri: String = intent.getStringExtra("Uri")!!
         Log.i(TAG, "Received Uri : $pdfUri")
+        rxManager.setOption(EuOption.builder()
+            .modeWith(EuOption.ModeType.EUPI)
+            .encodingWith(EuOption.CodingType.BASE16)
+            .modulationWith((EuOption.ModulationType.FSK))
+            .build())
 
         val pdfRenderer: PdfRenderer = loadRenderer(applicationContext, pdfUri)
         val imageList: List<ImageBitmap> = pdfToImageBitmaps(pdfRenderer)
@@ -55,29 +61,34 @@ class ViewerActivity : ComponentActivity() {
         val lastPage = images.lastIndex
         val context = LocalContext.current
 
-        rxManager.setOnWaveKeyDown(EuPICodeEnum.PREV_PAGE.code.toInt()) {
-            if (currentPage.value <= 0) {
-                Toast.makeText(context, "This is first page", Toast.LENGTH_LONG)
+        rxManager.setOnWaveKeyUp(EuPICodeEnum.PREV_PAGE.code.toInt()) {
+
+            if (currentPage.value == 0) {
+                Toast.makeText(context, "This is first page", Toast.LENGTH_SHORT).show()
                 Log.d(TAG, "This is first page.")
-            } else {
-                currentPage.value -= 1
+            } else{ currentPage.value -= 1
                 Log.d(TAG, "currentPage: $currentPage")
-            }
+                rxManager.finish()}
+
+            rxManager.listen()
         }
-        rxManager.setOnWaveKeyDown(EuPICodeEnum.NEXT_PAGE.code.toInt()) {
-            if (currentPage.value >= lastPage - 1) {
-                Toast.makeText(context, "This is last page", Toast.LENGTH_LONG)
+        rxManager.setOnWaveKeyUp(EuPICodeEnum.NEXT_PAGE.code.toInt()) {
+
+            if (currentPage.value == lastPage - 1) {
+                Toast.makeText(context, "This is last page", Toast.LENGTH_SHORT).show()
                 Log.d(TAG, "This is last page.")
             } else {
                 currentPage.value += 1
                 Log.d(TAG, "currentPage: $currentPage")
-            }
+                rxManager.finish()}
+            rxManager.listen()
         }
 
         if(rxManager.listen()){
             Log.d(TAG, "rxManager: listen success")
         }else{
             Log.d(TAG, "rxManager: listen fail")
+            rxManager.listen()
         }
         PageView(images[currentPage.value])
     }

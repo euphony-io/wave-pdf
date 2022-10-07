@@ -18,11 +18,10 @@ import com.euphony.common_lib.EuPICodeEnum
 
 class ControllerActivity : ComponentActivity() {
 
-    private val txManager = EuTxManager()
+    private val txManager = EuTxManager.getInstance()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        txManager.setMode(EuOption.ModeType.EUPI)
 
         setContent {
             InitControllerView(txManager = txManager)
@@ -46,7 +45,7 @@ fun InitControllerView(txManager: EuTxManager) {
                             EuPICodeEnum.PREV_PAGE.code,
                             EuTxManager.EuPIDuration.LENGTH_LONG
                         )== Constants.Result.OK) {
-                        Log.i("Controller", "PREV button is clicked")
+                        Log.i("WAVE_CONTROLLER", "PREV button is clicked")
                     }
                 },
                 shape = RoundedCornerShape(20),
@@ -61,7 +60,7 @@ fun InitControllerView(txManager: EuTxManager) {
                             EuPICodeEnum.NEXT_PAGE.code,
                             EuTxManager.EuPIDuration.LENGTH_LONG
                         )== Constants.Result.OK) {
-                        Log.i("Controller", "NEXT button is clicked")
+                        Log.i("WAVE_CONTROLLER", "NEXT button is clicked")
                     }
                 },
                 shape = RoundedCornerShape(20),

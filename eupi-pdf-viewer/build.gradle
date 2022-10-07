@@ -76,7 +76,7 @@ dependencies {
     implementation "androidx.compose.material:material-icons-extended:$compose_version"
 
     //Euphony
-    implementation 'co.euphony.lib:euphony:0.8.1.1'
+    implementation 'co.euphony.lib:euphony:0.8.2'
 
     // common-lib
     implementation project(":common-lib")
